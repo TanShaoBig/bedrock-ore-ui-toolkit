@@ -1,0 +1,989 @@
+{
+  "namespace": "orelab",
+  "rule": {
+    "type": "image",
+    "keep_ratio": false,
+    "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+    "size": ["100%", 2],
+    "color": [0.1922, 0.1961, 0.2],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [0, 0],
+    "controls": [
+      {
+        "light": {
+          "type": "image",
+          "keep_ratio": false,
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "size": ["100%", 1],
+          "color": [0.3529, 0.3569, 0.3608],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, 0],
+          "layer": 1
+        }
+      }
+    ]
+  },
+  "group": {
+    "type": "panel",
+    "size": ["100%", 24],
+    "controls": [
+      {
+        "title": {
+          "type": "label",
+          "text": "$title",
+          "font_type": "unicode",
+          "shadow": false,
+          "layer": 3,
+          "anchor_from": "left_middle",
+          "anchor_to": "left_middle",
+          "offset": [9, 1],
+          "color": [1, 1, 1]
+        }
+      },
+      {
+        "rule@orelab.rule": {}
+      }
+    ]
+  },
+  "row": {
+    "type": "panel",
+    "size": "$row_size",
+    "$row_size|default": ["100%", 36],
+    "controls": [
+      {
+        "title": {
+          "type": "label",
+          "text": "$title",
+          "font_type": "unicode",
+          "shadow": false,
+          "layer": 3,
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [9, 6]
+        }
+      },
+      {
+        "hint": {
+          "type": "label",
+          "text": "$hint",
+          "font_type": "unicode",
+          "shadow": false,
+          "layer": 3,
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [9, 18],
+          "color": [0.8157, 0.8196, 0.8314],
+          "font_scale_factor": 0.82
+        }
+      },
+      {
+        "rule@orelab.rule": {}
+      },
+      {
+        "field@$field": {}
+      }
+    ]
+  },
+  "checkbox@common_toggles.switch_toggle_collection": {
+    "$toggle_name": "#orelab_gallery.ToggleDetail",
+    "$toggle_state_binding_type": "global",
+    "$toggle_state_binding_name": "#orelab_gallery.Detailed",
+    "$default_texture": "textures/ui/ore_style/checkboxes/checkbox_off_normal",
+    "$hover_texture": "textures/ui/ore_style/checkboxes/checkbox_on_normal",
+    "$pressed_texture": "textures/ui/ore_style/checkboxes/checkbox_off_focus",
+    "$pressed_no_hover_texture": "textures/ui/ore_style/checkboxes/checkbox_on_focus",
+    "size": [16, 16],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [-10, -1]
+  },
+  "segments": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": ["100% - 18px", 21],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [0, -5],
+    "controls": [
+      {
+        "one@orelab_style.segment": {
+          "size": ["33.33%", "100%"],
+          "$ore_label": "1 次",
+          "$selected_binding": "#orelab_gallery.IsOne",
+          "$pressed_button_name": "#orelab_gallery.One"
+        }
+      },
+      {
+        "five@orelab_style.segment": {
+          "size": ["33.33%", "100%"],
+          "$ore_label": "5 次",
+          "$selected_binding": "#orelab_gallery.IsFive",
+          "$pressed_button_name": "#orelab_gallery.Five"
+        }
+      },
+      {
+        "ten@orelab_style.segment": {
+          "size": ["fill", "100%"],
+          "$ore_label": "10 次",
+          "$selected_binding": "#orelab_gallery.IsTen",
+          "$pressed_button_name": "#orelab_gallery.Ten"
+        }
+      }
+    ]
+  },
+  "slider_row": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "controls": [
+      {
+        "value": {
+          "type": "label",
+          "text": "#orelab_gallery.Percent",
+          "font_type": "unicode",
+          "shadow": false,
+          "layer": 3,
+          "bindings": [
+            {
+              "binding_name": "#orelab_gallery.Percent"
+            }
+          ],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "offset": [-9, 5]
+        }
+      },
+      {
+        "slider@orelab_style.damped_slider": {
+          "size": ["100% - 26px", 6],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -11],
+          "$slider_name": "#orelab_gallery.Slide",
+          "$slider_value_binding_name": "#orelab_gallery.Amount",
+          "$slider_steps_binding_name": "#orelab_gallery.Steps",
+          "$slider_tts_text_value": "#netease_tts_text_value",
+          "$continuous": true
+        }
+      }
+    ]
+  },
+  "meter": {
+    "type": "panel",
+    "size": ["100% - 18px", 8],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [0, -6],
+    "controls": [
+      {
+        "track@orelab_style.track": {}
+      },
+      {
+        "fill": {
+          "layer": 2,
+          "clip_direction": "left",
+          "bindings": [
+            {
+              "binding_name": "#orelab_gallery.Unfilled",
+              "binding_name_override": "#clip_ratio"
+            }
+          ],
+          "type": "image",
+          "texture": "textures/ui/ore_style/progress/progress_fill_mask",
+          "size": ["100% - 2px", "100% - 2px"],
+          "keep_ratio": false,
+          "color": [0.2353, 0.5216, 0.1529],
+          "clip_pixelperfect": false
+        }
+      }
+    ]
+  },
+  "stepper": {
+    "type": "panel",
+    "size": [86, 21],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [-10, -1],
+    "controls": [
+      {
+        "minus@orelab_style.button": {
+          "$ore_label": "−",
+          "$pressed_button_name": "#orelab_gallery.Minus",
+          "size": [24, 21],
+          "anchor_from": "left_middle",
+          "anchor_to": "left_middle",
+          "offset": [0, 0]
+        }
+      },
+      {
+        "value": {
+          "type": "label",
+          "text": "#orelab_gallery.Count",
+          "font_type": "unicode",
+          "shadow": false,
+          "layer": 3,
+          "bindings": [
+            {
+              "binding_name": "#orelab_gallery.Count"
+            }
+          ]
+        }
+      },
+      {
+        "plus@orelab_style.button": {
+          "$ore_label": "+",
+          "$pressed_button_name": "#orelab_gallery.Plus",
+          "size": [24, 21],
+          "anchor_from": "right_middle",
+          "anchor_to": "right_middle",
+          "offset": [0, 0]
+        }
+      }
+    ]
+  },
+  "edit@common.text_edit_box": {
+    "size": ["100% - 18px", 22],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [0, -5],
+    "$text_box_name": "#orelab_gallery.Edit",
+    "$text_box_text_color": [1, 1, 1],
+    "$place_holder_text": "输入测试名称",
+    "$place_holder_text_color": [0.6392, 0.6431, 0.651],
+    "$text_edit_box_content_binding_name": "#orelab_gallery.Name",
+    "$text_edit_box_content_binding_type": "global",
+    "$text_edit_box_enabled_binding_type": "none",
+    "$text_edit_box_grid_collection_name": "",
+    "$text_box_enabled_binding_name": "#enabled",
+    "max_length": 16,
+    "enabled_newline": false,
+    "$text_background_default": "orelab.edit_default",
+    "$text_background_hover": "orelab.edit_focus"
+  },
+  "apply@orelab_style.primary_button": {
+    "size": [64, 21],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [-10, -1],
+    "$ore_label": "测试点击",
+    "$pressed_button_name": "#orelab_gallery.Try",
+    "bindings": [
+      {
+        "binding_name": "#orelab_gallery.Enabled",
+        "binding_name_override": "#enabled"
+      }
+    ]
+  },
+  "info@orelab_style.info_button": {
+    "size": [64, 21],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [-10, -1],
+    "$ore_label": "查看状态",
+    "$pressed_button_name": "#orelab_gallery.Inspect"
+  },
+  "reset@orelab_style.button": {
+    "size": [64, 21],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [-10, -1],
+    "$ore_label": "恢复默认",
+    "$pressed_button_name": "#orelab_gallery.Reset"
+  },
+  "clear@orelab_style.danger_button": {
+    "size": [64, 21],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [-10, -1],
+    "$ore_label": "清零",
+    "$pressed_button_name": "#orelab_gallery.Clear"
+  },
+  "nav@common.button": {
+    "size": ["100%", 25],
+    "controls": [
+      {
+        "default@orelab.nav_face": {
+          "$nav_color": [0.1922, 0.1961, 0.2]
+        }
+      },
+      {
+        "hover@orelab.nav_face": {
+          "$nav_color": [0.235, 0.239, 0.243]
+        }
+      },
+      {
+        "pressed@orelab.nav_face": {
+          "$nav_color": [0.2824, 0.2863, 0.2902]
+        }
+      },
+      {
+        "current@orelab.nav_face": {
+          "$nav_color": [0.2824, 0.2863, 0.2902],
+          "bindings": [
+            {
+              "binding_name": "$current_binding",
+              "binding_name_override": "#visible"
+            }
+          ],
+          "layer": 6
+        }
+      },
+      {
+        "top_edge": {
+          "type": "image",
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "keep_ratio": false,
+          "size": ["100%", 1],
+          "color": [0.1176, 0.1176, 0.1176],
+          "bindings": [
+            {
+              "binding_name": "$current_binding",
+              "binding_name_override": "#visible"
+            }
+          ],
+          "layer": 11,
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [0, 0]
+        }
+      },
+      {
+        "bottom_edge": {
+          "type": "image",
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "keep_ratio": false,
+          "size": ["100%", 1],
+          "color": [0.35, 0.355, 0.36],
+          "bindings": [
+            {
+              "binding_name": "$current_binding",
+              "binding_name_override": "#visible"
+            }
+          ],
+          "layer": 11,
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, 0]
+        }
+      }
+    ]
+  },
+  "rail": {
+    "type": "panel",
+    "size": ["30%", "100% - 26px"],
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "offset": [0, 0],
+    "controls": [
+      {
+        "base": {
+          "type": "image",
+          "keep_ratio": false,
+          "texture": "textures/ui/ore_style/surfaces/surface_sidebar",
+          "size": ["100%", "100%"]
+        }
+      },
+      {
+        "edge": {
+          "type": "image",
+          "keep_ratio": false,
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "size": [1, "100%"],
+          "color": [0.1176, 0.1176, 0.1176],
+          "anchor_from": "right_middle",
+          "anchor_to": "right_middle",
+          "offset": [0, 0]
+        }
+      },
+      {
+        "links": {
+          "type": "stack_panel",
+          "orientation": "vertical",
+          "size": ["100% - 1px", "100%c"],
+          "controls": [
+            {
+              "settings@orelab.rail_heading": {
+                "$title": "设置项"
+              }
+            },
+            {
+              "select@orelab.nav": {
+                "$title": "选择控件",
+                "$icon": "textures/ui/ore_style/icons/icon_adjustments",
+                "$pressed_button_name": "#orelab_gallery.JumpSelect",
+                "$current_binding": "#orelab_gallery.ShowSelection"
+              }
+            },
+            {
+              "number@orelab.nav": {
+                "$title": "数值调节",
+                "$icon": "textures/ui/ore_style/icons/icon_reticle",
+                "$pressed_button_name": "#orelab_gallery.JumpNumber",
+                "$current_binding": "#orelab_gallery.ShowNumbers"
+              }
+            },
+            {
+              "tools@orelab.rail_heading": {
+                "$title": "测试工具"
+              }
+            },
+            {
+              "action@orelab.nav": {
+                "$title": "输入与操作",
+                "$icon": "textures/ui/ore_style/icons/icon_book",
+                "$pressed_button_name": "#orelab_gallery.JumpAction",
+                "$current_binding": "#orelab_gallery.ShowActions"
+              }
+            }
+          ],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [0, 0]
+        }
+      }
+    ]
+  },
+  "gallery": {
+    "type": "screen",
+    "controls": [
+      {
+        "background": {
+          "type": "image",
+          "keep_ratio": false,
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "size": ["100%", "100%"],
+          "color": [0.2824, 0.2863, 0.2902]
+        }
+      },
+      {
+        "rail@orelab.rail": {}
+      },
+      {
+        "body_selection@common.scrolling_panel": {
+          "anchor_from": "bottom_right",
+          "anchor_to": "bottom_right",
+          "offset": [0, -21],
+          "size": ["70%", "100% - 47px"],
+          "$scrolling_content": "orelab.selection_list",
+          "$show_background": false,
+          "$scroll_box_visible_touch": true,
+          "$allow_scrolling_even_when_content_fits": false,
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#orelab_gallery.ShowSelection",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "body_numbers@common.scrolling_panel": {
+          "anchor_from": "bottom_right",
+          "anchor_to": "bottom_right",
+          "offset": [0, -21],
+          "size": ["70%", "100% - 47px"],
+          "$scrolling_content": "orelab.numbers_list",
+          "$show_background": false,
+          "$scroll_box_visible_touch": true,
+          "$allow_scrolling_even_when_content_fits": false,
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#orelab_gallery.ShowNumbers",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "body_actions@common.scrolling_panel": {
+          "anchor_from": "bottom_right",
+          "anchor_to": "bottom_right",
+          "offset": [0, -21],
+          "size": ["70%", "100% - 47px"],
+          "$scrolling_content": "orelab.actions_list",
+          "$show_background": false,
+          "$scroll_box_visible_touch": true,
+          "$allow_scrolling_even_when_content_fits": false,
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#orelab_gallery.ShowActions",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "feedback": {
+          "type": "panel",
+          "size": ["70%", 21],
+          "anchor_from": "bottom_right",
+          "anchor_to": "bottom_right",
+          "offset": [0, 0],
+          "layer": 3,
+          "controls": [
+            {
+              "base": {
+                "type": "image",
+                "keep_ratio": false,
+                "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+                "size": ["100%", "100%"],
+                "color": [0.1922, 0.1961, 0.2]
+              }
+            },
+            {
+              "status": {
+                "type": "label",
+                "text": "#orelab_gallery.Status",
+                "font_type": "unicode",
+                "shadow": false,
+                "layer": 3,
+                "bindings": [
+                  {
+                    "binding_name": "#orelab_gallery.Status"
+                  }
+                ],
+                "anchor_from": "left_middle",
+                "anchor_to": "left_middle",
+                "offset": [8, 0],
+                "font_scale_factor": 0.85
+              }
+            }
+          ]
+        }
+      },
+      {
+        "header": {
+          "type": "panel",
+          "size": ["100%", 26],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [0, 0],
+          "layer": 4,
+          "controls": [
+            {
+              "bg": {
+                "type": "image",
+                "keep_ratio": false,
+                "texture": "textures/ui/ore_style/surfaces/surface_header",
+                "size": ["100%", "100%"],
+                "nineslice_size": [0, 0, 0, 2]
+              }
+            },
+            {
+              "title": {
+                "type": "label",
+                "text": "Ore UI 控件实验室",
+                "font_type": "unicode",
+                "shadow": false,
+                "layer": 3,
+                "color": [0.1176, 0.1176, 0.1176],
+                "offset": [0, -1]
+              }
+            },
+            {
+              "back@common.button": {
+                "size": [27, 24],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [0, 0],
+                "layer": 4,
+                "$pressed_button_name": "#orelab_gallery.Back",
+                "controls": [
+                  {
+                    "default": {
+                      "type": "panel",
+                      "size": ["100%", "100%"],
+                      "controls": [
+                        {
+                          "icon": {
+                            "type": "image",
+                            "keep_ratio": false,
+                            "texture": "textures/ui/ore_style/navigation/nav_back",
+                            "size": [7, 12],
+                            "alpha": 1,
+                            "color": [0.12, 0.12, 0.12]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "hover": {
+                      "type": "panel",
+                      "size": ["100%", "100%"],
+                      "controls": [
+                        {
+                          "icon": {
+                            "type": "image",
+                            "keep_ratio": false,
+                            "texture": "textures/ui/ore_style/navigation/nav_back",
+                            "size": [7, 12],
+                            "alpha": 1,
+                            "color": [0.12, 0.12, 0.12]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "pressed": {
+                      "type": "panel",
+                      "size": ["100%", "100%"],
+                      "controls": [
+                        {
+                          "icon": {
+                            "type": "image",
+                            "keep_ratio": false,
+                            "texture": "textures/ui/ore_style/navigation/nav_back",
+                            "size": [7, 12],
+                            "alpha": 0.55,
+                            "color": [0.12, 0.12, 0.12]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "$button_focus_precedence": 10
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "launcher": {
+    "type": "screen",
+    "controls": [
+      {
+        "entry@orelab_style.button": {
+          "size": [68, 18],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "offset": [-5, 34],
+          "$ore_label": "控件测试 [O]",
+          "$pressed_button_name": "#orelab_launcher.Open"
+        }
+      }
+    ]
+  },
+  "edit_default": {
+    "type": "image",
+    "texture": "textures/ui/ore_style/fields/field_text_normal",
+    "nineslice_size": [2, 2, 2, 2],
+    "keep_ratio": false
+  },
+  "edit_focus@orelab.edit_default": {
+    "texture": "textures/ui/ore_style/fields/field_text_focus"
+  },
+  "switch": {
+    "type": "panel",
+    "size": [30, 16],
+    "controls": [
+      {
+        "input@common_toggles.switch_toggle_collection": {
+          "$toggle_name": "#orelab_gallery.ToggleEnabled",
+          "$toggle_state_binding_type": "global",
+          "$toggle_state_binding_name": "#orelab_gallery.Enabled",
+          "$default_texture": "textures/ui/ore_style/switches/switch_off_normal",
+          "$hover_texture": "textures/ui/ore_style/switches/switch_on_normal",
+          "$pressed_texture": "textures/ui/ore_style/switches/switch_off_hover",
+          "$pressed_no_hover_texture": "textures/ui/ore_style/switches/switch_on_hover",
+          "size": [30, 16]
+        }
+      },
+      {
+        "transition": {
+          "type": "image",
+          "visible": false,
+          "size": ["100%", "100%"],
+          "layer": 9,
+          "keep_ratio": false,
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "color": [0.2824, 0.2863, 0.2902],
+          "controls": [
+            {
+              "frame": {
+                "type": "image",
+                "size": ["100%", "100%"],
+                "layer": 10,
+                "keep_ratio": false,
+                "texture": "textures/ui/ore_style/switches/switch_transition_frames",
+                "uv": [0, 0],
+                "uv_size": [30, 16]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [-10, -1]
+  },
+  "discrete_row": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "controls": [
+      {
+        "value": {
+          "type": "label",
+          "text": "#orelab_gallery.LevelLabel",
+          "font_type": "unicode",
+          "shadow": false,
+          "layer": 3,
+          "bindings": [
+            {
+              "binding_name": "#orelab_gallery.LevelLabel"
+            }
+          ],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "offset": [-9, 5]
+        }
+      },
+      {
+        "slider@orelab_style.damped_slider": {
+          "size": ["100% - 26px", 6],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -11],
+          "$slider_name": "#orelab_gallery.ChooseLevel",
+          "$slider_value_binding_name": "#orelab_gallery.LevelIndex",
+          "$slider_steps_binding_name": "#orelab_gallery.LevelSteps",
+          "$slider_tts_text_value": "#netease_tts_text_value",
+          "$slider_steps": 5,
+          "$continuous": false
+        }
+      }
+    ]
+  },
+  "selection_list": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "size": ["100%", "100%c"],
+    "controls": [
+      {
+        "selection@orelab.group": {
+          "$title": "选择控件"
+        }
+      },
+      {
+        "allow@orelab.row": {
+          "$title": "启用测试按钮",
+          "$hint": "控制「输入与操作」里的测试按钮。",
+          "$field": "orelab.switch",
+          "$row_size": ["100%", 36]
+        }
+      },
+      {
+        "detail@orelab.row": {
+          "$title": "详细反馈",
+          "$hint": "在反馈栏中显示本次计数。",
+          "$field": "orelab.checkbox",
+          "$row_size": ["100%", 36]
+        }
+      },
+      {
+        "step@orelab.row": {
+          "$title": "点击步长",
+          "$hint": "选择每次操作改变的数量。",
+          "$field": "orelab.segments",
+          "$row_size": ["100%", 56]
+        }
+      }
+    ]
+  },
+  "numbers_list": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "size": ["100%", "100%c"],
+    "controls": [
+      {
+        "numbers@orelab.group": {
+          "$title": "数值调节"
+        }
+      },
+      {
+        "amount@orelab.row": {
+          "$title": "填充比例",
+          "$hint": "拖动手柄，观察下方进度。",
+          "$field": "orelab.slider_row",
+          "$row_size": ["100%", 55]
+        }
+      },
+      {
+        "progress@orelab.row": {
+          "$title": "进度条",
+          "$hint": "随填充比例同步变化。",
+          "$field": "orelab.meter",
+          "$row_size": ["100%", 45]
+        }
+      },
+      {
+        "quality@orelab.row": {
+          "$title": "采样档位",
+          "$hint": "拖到刻度，选择 1、2、4、8 或 16。",
+          "$field": "orelab.discrete_row",
+          "$row_size": ["100%", 55]
+        }
+      },
+      {
+        "counter@orelab.row": {
+          "$title": "计数器",
+          "$hint": "用加减键调整。",
+          "$field": "orelab.stepper",
+          "$row_size": ["100%", 36]
+        }
+      }
+    ]
+  },
+  "actions_list": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "size": ["100%", "100%c"],
+    "controls": [
+      {
+        "actions@orelab.group": {
+          "$title": "输入与操作"
+        }
+      },
+      {
+        "input@orelab.row": {
+          "$title": "测试名称",
+          "$hint": "输入的名称会用于操作反馈。",
+          "$field": "orelab.edit",
+          "$row_size": ["100%", 58]
+        }
+      },
+      {
+        "try@orelab.row": {
+          "$title": "主要操作",
+          "$hint": "按当前步长增加计数。",
+          "$field": "orelab.apply",
+          "$row_size": ["100%", 36]
+        }
+      },
+      {
+        "view@orelab.row": {
+          "$title": "信息操作",
+          "$hint": "查看计数和填充比例。",
+          "$field": "orelab.info",
+          "$row_size": ["100%", 36]
+        }
+      },
+      {
+        "restore@orelab.row": {
+          "$title": "普通操作",
+          "$hint": "恢复所有测试控件的初始值。",
+          "$field": "orelab.reset",
+          "$row_size": ["100%", 36]
+        }
+      },
+      {
+        "zero@orelab.row": {
+          "$title": "危险操作",
+          "$hint": "仅清除本次测试计数。",
+          "$field": "orelab.clear",
+          "$row_size": ["100%", 36]
+        }
+      }
+    ]
+  },
+  "nav_face": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "controls": [
+      {
+        "base": {
+          "type": "image",
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "keep_ratio": false,
+          "size": ["100%", "100%"],
+          "color": "$nav_color"
+        }
+      },
+      {
+        "icon_frame": {
+          "type": "image",
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "keep_ratio": false,
+          "size": [14, 14],
+          "color": [0.1176, 0.1176, 0.1176],
+          "layer": 2,
+          "anchor_from": "left_middle",
+          "anchor_to": "left_middle",
+          "offset": [7, 0],
+          "controls": [
+            {
+              "plate": {
+                "type": "image",
+                "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+                "keep_ratio": false,
+                "size": [12, 12],
+                "color": [0.3, 0.31, 0.32],
+                "layer": 1
+              }
+            },
+            {
+              "glyph": {
+                "type": "image",
+                "texture": "$icon",
+                "keep_ratio": true,
+                "size": [11, 11],
+                "layer": 2
+              }
+            }
+          ]
+        }
+      },
+      {
+        "caption": {
+          "type": "label",
+          "text": "$title",
+          "font_type": "unicode",
+          "shadow": false,
+          "color": [1, 1, 1],
+          "layer": 3,
+          "anchor_from": "left_middle",
+          "anchor_to": "left_middle",
+          "offset": [26, 0]
+        }
+      }
+    ]
+  },
+  "rail_heading": {
+    "type": "panel",
+    "size": ["100%", 21],
+    "controls": [
+      {
+        "title": {
+          "type": "label",
+          "text": "$title",
+          "font_type": "unicode",
+          "font_scale_factor": 0.82,
+          "shadow": false,
+          "color": [0.8157, 0.8196, 0.8314],
+          "anchor_from": "bottom_left",
+          "anchor_to": "bottom_left",
+          "offset": [7, -3]
+        }
+      },
+      {
+        "divider": {
+          "type": "image",
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "keep_ratio": false,
+          "size": ["100%", 1],
+          "color": [0.1176, 0.1176, 0.1176],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle"
+        }
+      }
+    ]
+  }
+}

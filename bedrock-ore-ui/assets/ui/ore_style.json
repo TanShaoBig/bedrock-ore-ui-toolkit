@@ -158,6 +158,16 @@
     "size": ["100%", "100%"],
     "controls": [
       {
+        "$native_slider_background@ore_style.track": {
+          "alpha": 0
+        }
+      },
+      {
+        "$native_slider_progress@ore_style.fill": {
+          "alpha": 0
+        }
+      },
+      {
         "track@ore_style.track": {}
       },
       {
@@ -257,11 +267,15 @@
       },
       {
         "slider_bar_default@ore_style.slider_view": {
+          "$native_slider_background": "slider_background",
+          "$native_slider_progress": "slider_progress",
           "$thumb_texture": "textures/ui/ore_style/buttons/button_neutral_normal"
         }
       },
       {
         "slider_bar_hover@ore_style.slider_view": {
+          "$native_slider_background": "slider_background_hover",
+          "$native_slider_progress": "slider_progress_hover",
           "$thumb_texture": "textures/ui/ore_style/buttons/button_neutral_hover",
           "visible": false
         }

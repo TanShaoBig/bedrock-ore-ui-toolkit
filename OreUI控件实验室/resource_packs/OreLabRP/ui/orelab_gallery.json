@@ -658,18 +658,7 @@
   },
   "launcher": {
     "type": "screen",
-    "controls": [
-      {
-        "entry@orelab_style.button": {
-          "size": [68, 18],
-          "anchor_from": "top_right",
-          "anchor_to": "top_right",
-          "offset": [-5, 34],
-          "$ore_label": "控件测试 [O]",
-          "$pressed_button_name": "#orelab_launcher.Open"
-        }
-      }
-    ]
+    "controls": [{"canvas@ore_layout.hud_controls": {}}]
   },
   "edit_default": {
     "type": "image",
@@ -842,6 +831,10 @@
       }
     ]
   },
+  "open_layout@orelab.info": {
+    "$ore_label": "调整",
+    "$pressed_button_name": "#orelab_gallery.EditLayout"
+  },
   "actions_list": {
     "type": "stack_panel",
     "orientation": "vertical",
@@ -850,6 +843,13 @@
       {
         "actions@orelab.group": {
           "$title": "输入与操作"
+        }
+      },
+      {
+        "layout@orelab.row": {
+          "$title": "按钮布局",
+          "$hint": "拖动并调整游戏中的按钮。",
+          "$field": "orelab.open_layout"
         }
       },
       {

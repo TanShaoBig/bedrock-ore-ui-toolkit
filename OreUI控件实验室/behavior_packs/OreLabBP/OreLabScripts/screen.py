@@ -4,12 +4,19 @@ import time
 
 import mod.client.extraClientApi as clientApi
 
+from .hud_editor import LayoutHud
+
 Screen = clientApi.GetScreenNodeCls()
 Bind = clientApi.GetViewBinderCls()
 Request = clientApi.GetViewViewRequestCls()
 
 
-class LabLauncher(Screen):
+class LabLauncher(LayoutHud):
+    @Bind.binding(Bind.BF_ButtonClickUp, "#orelab_launcher.EditLayout")
+    def EditLayout(self, args):
+        clientApi.PushScreen("OreLab", "layout")
+        return Request.Nothing
+
     @Bind.binding(Bind.BF_ButtonClickUp, "#orelab_launcher.Open")
     def Open(self, args):
         clientApi.PushScreen("OreLab", "gallery")
@@ -23,7 +30,14 @@ class LabGallery(Screen):
         self.category = "selection"
         self.slider_motion = {}
         self.slider_positions = {"amount": 0.5, "quality": 0.5}
+        self.pending_slider_sync = False
+        self.next_slider_sync = 0.0
         self.defaults()
+
+    @Bind.binding(Bind.BF_ButtonClickUp, "#orelab_gallery.EditLayout")
+    def EditLayout(self, args):
+        clientApi.PushScreen("OreLab", "layout")
+        return Request.Nothing
 
     def defaults(self):
         self.enabled = True
@@ -50,11 +64,14 @@ class LabGallery(Screen):
                 self.sync_sliders()
             else:
                 self.slider_motion.clear()
+                self.pending_slider_sync = False
         return Request.Refresh
 
     def list_control(self, section, relative):
-        viewport = self.GetBaseUIControl("/body_" + section).asScrollView()
-        return self.GetBaseUIControl(viewport.GetScrollViewContentPath() + relative)
+        node = self.GetBaseUIControl("/body_" + section)
+        viewport = node.asScrollView() if node else None
+        path = viewport.GetScrollViewContentPath() if viewport else None
+        return self.GetBaseUIControl(path + relative) if path else None
 
     def switch_position(self, now):
         start, end, since, duration, panel, image = self.switch_motion
@@ -66,7 +83,11 @@ class LabGallery(Screen):
         start = self.switch_position(now) if self.switch_motion else float(self.enabled)
         end = float(enabled)
         panel = self.list_control("selection", "/allow/field/transition")
-        frame = panel.GetChildByName("frame").asImage()
+        child = panel.GetChildByName("frame") if panel else None
+        frame = child.asImage() if child else None
+        if not frame:
+            self.switch_motion = None
+            return
         self.switch_motion = (start, end, now, max(0.04, 0.14 * abs(end - start)), panel, frame)
         frame.SetSpriteUV((30 * int(round(14 * start)), 0))
         panel.SetVisible(True)
@@ -74,8 +95,18 @@ class LabGallery(Screen):
     # The native slider owns input and values. Only the two rendered skins follow.
     def slider_parts(self, row):
         slider = self.list_control("numbers", "/" + row + "/field/slider")
-        skins = [slider.GetChildByName(name) for name in ("slider_bar_default", "slider_bar_hover")]
-        return [(skin.GetChildByName("thumb"), skin.GetChildByName("fill")) for skin in skins]
+        if not slider:
+            return []
+        parts = []
+        for name in ("slider_bar_default", "slider_bar_hover"):
+            skin = slider.GetChildByName(name)
+            if not skin:
+                return []
+            thumb, fill = skin.GetChildByName("thumb"), skin.GetChildByName("fill")
+            if not thumb or not fill:
+                return []
+            parts.append((thumb, fill))
+        return parts
 
     def place_thumb(self, row, parts, position):
         self.slider_positions[row] = position
@@ -85,9 +116,15 @@ class LabGallery(Screen):
             fill.SetFullSize("x", offset)
 
     def sync_sliders(self):
+        self.next_slider_sync = time.time() + 0.15
         self.slider_motion.clear()
+        self.pending_slider_sync = False
         for row, position in (("amount", self.amount), ("quality", self.level_index / 4.0)):
-            self.place_thumb(row, self.slider_parts(row), position)
+            parts = self.slider_parts(row)
+            if parts:
+                self.place_thumb(row, parts, position)
+            else:
+                self.pending_slider_sync = True
 
     def follow_input(self, row, target):
         if self.category != "numbers":
@@ -102,6 +139,9 @@ class LabGallery(Screen):
             self.slider_motion.pop(row, None)
             return
         parts = motion["parts"] if motion else self.slider_parts(row)
+        if not parts:
+            self.pending_slider_sync = True
+            return
         self.slider_motion[row] = {"target": target, "last": now, "parts": parts}
 
     def advance_thumb(self, row, motion, now):
@@ -116,6 +156,8 @@ class LabGallery(Screen):
             self.slider_motion.pop(row, None)
 
     def Update(self):
+        if self.pending_slider_sync and self.category == "numbers" and time.time() >= self.next_slider_sync:
+            self.sync_sliders()
         if not (self.switch_motion or self.slider_motion):
             return
         now = time.time()

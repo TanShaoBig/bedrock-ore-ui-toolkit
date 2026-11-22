@@ -2,7 +2,7 @@
 from mod.common.mod import Mod
 
 
-@Mod.Binding(name="OreLab", version="1.0.2")
+@Mod.Binding(name="OreLab", version="1.1.0")
 class OreLabMod(object):
     @Mod.InitClient()
     def init_client(self):

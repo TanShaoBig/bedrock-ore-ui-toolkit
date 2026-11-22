@@ -1,6 +1,7 @@
 {
   "ui_defs": [
     "ui/orelab_style.json",
+    "ui/orelab_layout.json",
     "ui/orelab_gallery.json"
   ]
 }

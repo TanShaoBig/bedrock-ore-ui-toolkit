@@ -14,6 +14,7 @@ class LabClient(clientApi.GetClientSystemCls()):
     def on_ui_ready(self, args):
         for name, cls in (("launcher", "LabLauncher"), ("gallery", "LabGallery")):
             clientApi.RegisterUI("OreLab", name, "OreLabScripts.screen." + cls, "orelab." + name)
+        clientApi.RegisterUI("OreLab", "layout", "OreLabScripts.hud_editor.LayoutEditor", "ore_layout.editor")
         clientApi.CreateUI("OreLab", "launcher", {"isHud": 1})
         self.ready = True
 

@@ -4,14 +4,14 @@
     "name": "Ore UI 控件实验室 · 界面",
     "description": "在游戏中试用像素风设置控件",
     "uuid": "9993c34c-3f48-4937-8502-9cd169c086df",
-    "version": [1, 0, 2],
+    "version": [1, 1, 0],
     "min_engine_version": [1, 18, 0]
   },
   "modules": [
     {
       "type": "resources",
       "uuid": "49965da1-1c3b-444c-ab2b-04e3e18fee23",
-      "version": [1, 0, 2]
+      "version": [1, 1, 0]
     }
   ]
 }

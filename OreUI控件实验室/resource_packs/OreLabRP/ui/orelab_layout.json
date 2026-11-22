@@ -1,0 +1,230 @@
+{
+  "namespace": "ore_layout",
+  "hud_controls": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "controls": [
+      {
+        "entry@orelab_style.button": {
+          "size": [68, 18],
+          "$ore_label": "控件测试 [O]",
+          "$pressed_button_name": "#orelab_launcher.Open",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [0, 0],
+          "propagate_alpha": true
+        }
+      },
+      {
+        "layout@orelab_style.button": {
+          "size": [54, 18],
+          "$ore_label": "按钮布局",
+          "$pressed_button_name": "#orelab_launcher.EditLayout",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [0, 0],
+          "propagate_alpha": true
+        }
+      }
+    ],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "offset": [0, 0]
+  },
+  "editor": {
+    "type": "screen",
+    "controls": [
+      {
+        "preview_back": {
+          "type": "image",
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "keep_ratio": false,
+          "color": [0.192, 0.196, 0.2],
+          "size": ["100%", "100%"],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [0, 0]
+        }
+      },
+      {
+        "canvas": {
+          "type": "panel",
+          "size": ["100%", "100% - 96px"],
+          "controls": [
+            {
+              "entry@orelab_style.button": {
+                "size": [68, 18],
+                "$ore_label": "控件测试 [O]",
+                "$pressed_button_name": "button.ore_layout_handle",
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [0, 0],
+                "propagate_alpha": true
+              }
+            },
+            {
+              "layout@orelab_style.button": {
+                "size": [54, 18],
+                "$ore_label": "按钮布局",
+                "$pressed_button_name": "button.ore_layout_handle",
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [0, 0],
+                "propagate_alpha": true
+              }
+            }
+          ],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [0, 24]
+        }
+      },
+      {
+        "bar": {
+          "type": "image",
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "keep_ratio": false,
+          "color": [0.9, 0.91, 0.92],
+          "size": ["100%", 24],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [0, 0]
+        }
+      },
+      {
+        "title": {
+          "type": "label",
+          "text": "按钮布局",
+          "font_type": "unicode",
+          "shadow": false,
+          "layer": 3,
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [0, 6],
+          "color": [0.12, 0.12, 0.12]
+        }
+      },
+      {
+        "tools": {
+          "type": "image",
+          "texture": "textures/ui/ore_style/surfaces/surface_solid_white",
+          "keep_ratio": false,
+          "color": [0.282, 0.286, 0.29],
+          "size": ["100%", 72],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, 0]
+        }
+      },
+      {
+        "status": {
+          "type": "label",
+          "text": "拖动按钮调整位置",
+          "font_type": "unicode",
+          "shadow": false,
+          "layer": 3,
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -54],
+          "font_scale_factor": 0.85
+        }
+      },
+      {
+        "row_27": {
+          "type": "stack_panel",
+          "orientation": "horizontal",
+          "size": ["100% - 8px", 22],
+          "controls": [
+            {
+              "next@orelab_style.button": {
+                "size": ["20.000000%", "100%"],
+                "$ore_label": "切换按键",
+                "$pressed_button_name": "#ore_editor.Next"
+              }
+            },
+            {
+              "smaller@orelab_style.button": {
+                "size": ["20.000000%", "100%"],
+                "$ore_label": "缩小",
+                "$pressed_button_name": "#ore_editor.Smaller"
+              }
+            },
+            {
+              "larger@orelab_style.button": {
+                "size": ["20.000000%", "100%"],
+                "$ore_label": "放大",
+                "$pressed_button_name": "#ore_editor.Larger"
+              }
+            },
+            {
+              "dimmer@orelab_style.button": {
+                "size": ["20.000000%", "100%"],
+                "$ore_label": "减淡",
+                "$pressed_button_name": "#ore_editor.Dimmer"
+              }
+            },
+            {
+              "brighter@orelab_style.button": {
+                "size": ["fill", "100%"],
+                "$ore_label": "加深",
+                "$pressed_button_name": "#ore_editor.Brighter"
+              }
+            }
+          ],
+          "layer": 3,
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -27]
+        }
+      },
+      {
+        "row_3": {
+          "type": "stack_panel",
+          "orientation": "horizontal",
+          "size": ["100% - 8px", 22],
+          "controls": [
+            {
+              "reset@orelab_style.button": {
+                "size": ["20.000000%", "100%"],
+                "$ore_label": "重置",
+                "$pressed_button_name": "#ore_editor.Reset"
+              }
+            },
+            {
+              "copy@orelab_style.info_button": {
+                "size": ["20.000000%", "100%"],
+                "$ore_label": "复制码",
+                "$pressed_button_name": "#ore_editor.Copy"
+              }
+            },
+            {
+              "paste@orelab_style.info_button": {
+                "size": ["20.000000%", "100%"],
+                "$ore_label": "导入码",
+                "$pressed_button_name": "#ore_editor.Paste"
+              }
+            },
+            {
+              "close@orelab_style.button": {
+                "size": ["20.000000%", "100%"],
+                "$ore_label": "取消",
+                "$pressed_button_name": "#ore_editor.Close"
+              }
+            },
+            {
+              "save@orelab_style.primary_button": {
+                "size": ["fill", "100%"],
+                "$ore_label": "保存",
+                "$pressed_button_name": "#ore_editor.Save"
+              }
+            }
+          ],
+          "layer": 3,
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -3]
+        }
+      }
+    ]
+  }
+}
